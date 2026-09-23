@@ -1,75 +1,36 @@
-# React + TypeScript + Vite
+# Web Demo Application (`apps/web`)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Demonstration client for the Media SDK monorepo, showing end-to-end integration between `@media/react` and `@media/ui-react`.
 
-Currently, two official plugins are available:
+## Architecture & Wiring
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Data Layer**: `@media/react` (`MediaProvider`, `useCuratedPhotos`, `useSearchPhotos`, `usePopularVideos`, `useSearchVideos`, `useMediaEvents`).
+- **UI Layer**: `@media/ui-react` (`useGrid`, `useLightbox`, `useReelSwiper`).
+- **Composition**: The web app only contains composition/wiring logic and custom styling — zero business logic.
+- **Dependency Rule**: Imports exclusively from `@media/react` and `@media/ui-react`. Direct imports from `@media/core` are disallowed by architecture boundary rules.
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **Explore & Search View**:
+   - Debounced search with `useDeferredValue`.
+   - Toggle between **Photos** and **Videos**.
+   - Infinite scroll grid with `useGrid` and sentinel element.
+   - Graceful loading, error, and empty states.
+2. **Headless Media Lightbox**:
+   - Polymorphic media support (full-res images and video playback).
+   - Global keyboard navigation (`Escape`, `ArrowLeft`, `ArrowRight`).
+   - Dispatches `view` event on item transition.
+   - Dispatches `download` event when user clicks download.
+3. **Reels Swiper View**:
+   - Vertical snap-scrolling video feed with `useReelSwiper`.
+   - 60% viewport intersection threshold for active reel detection.
+   - Autoplay active video, pause inactive videos.
+   - Dispatches `view` event when active slide changes.
+4. **Realtime Activity Log**:
+   - Floating dock subscribing to live SDK events (`view` & `download`) via `useMediaEvents()`.
 
-## Expanding the ESLint configuration
+## Development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+bun run dev
 ```
