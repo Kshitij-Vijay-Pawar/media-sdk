@@ -1,0 +1,23 @@
+{
+  "name": "media-sdk",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "turbo": "^2.11.3"
+  },
+  "peerDependencies": {
+    "typescript": "^7.0.2"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "test": "turbo test"
+  }
+}
