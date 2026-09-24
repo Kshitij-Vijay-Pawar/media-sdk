@@ -1,0 +1,13 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "packages/media-core/src/index.ts",
+    "packages/media-react/src/index.ts"
+  ],
+  "entryPointStrategy": "expand",
+  "tsconfig": "./tsconfig.typedoc.json",
+  "out": "docs/html",
+  "name": "Media SDK Documentation",
+  "readme": "none",
+  "githubPages": false
+}

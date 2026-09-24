@@ -37,6 +37,7 @@
     "lint": "turbo lint",
     "test": "turbo test",
     "docs:api": "typedoc --options typedoc.json",
+    "docs:html": "typedoc --options typedoc.html.json",
     "storybook": "bun --cwd packages/media-ui-react storybook",
     "build-storybook": "bun --cwd packages/media-ui-react build-storybook"
   },
