@@ -156,7 +156,7 @@ describe("@media/core SDK", () => {
   });
 
   it("401 response throws MediaError with code AUTH", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
+    vi.spyOn(globalThis, "fetch").mockResolvedValue({
       ok: false,
       status: 401,
       text: async () => "Unauthorized",
