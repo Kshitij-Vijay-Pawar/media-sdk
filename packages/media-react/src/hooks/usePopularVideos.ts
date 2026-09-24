@@ -2,18 +2,32 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import type { Video, PaginationParams, MediaError } from "@media/core";
 import { useMediaClient } from "../context";
 
+/** Options for configuring popular videos pagination */
 export type UsePopularVideosOptions = PaginationParams;
 
+/** Return value contract for the `usePopularVideos` hook */
 export interface UsePopularVideosReturn {
+  /** Accumulative array of popular videos */
   data: Video[];
+  /** Whether a network request is currently active */
   loading: boolean;
+  /** Error object if the request failed, or null */
   error: MediaError | null;
+  /** Trigger loading the subsequent page of popular videos */
   fetchNextPage: () => Promise<void>;
+  /** Whether additional video pages are available on the server */
   hasMore: boolean;
+  /** Total matching video count */
   totalResults: number;
+  /** Current page index */
   page: number;
 }
 
+/**
+ * Declarative hook for retrieving trending / popular videos from Pexels with infinite pagination.
+ *
+ * @param options Optional pagination parameters
+ */
 export function usePopularVideos(
   options?: UsePopularVideosOptions
 ): UsePopularVideosReturn {

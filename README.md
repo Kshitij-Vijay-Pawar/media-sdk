@@ -96,12 +96,29 @@ PEXELS_API_KEY=your_actual_pexels_api_key
   ```bash
   bun run lint
   ```
-- **Start development server:**
+- **Start web app development server:**
   ```bash
   bun run dev
   ```
+- **Generate TypeDoc API Documentation:**
+  ```bash
+  bun run docs:api
+  ```
+- **Start Storybook component documentation:**
+  ```bash
+  bun run storybook
+  ```
+- **Build static Storybook bundle:**
+  ```bash
+  bun run build-storybook
+  ```
 
 ---
+
+## Documentation & Stories
+
+- **SDK API Documentation (TypeDoc)**: Generated into [`docs/api/`](./docs/api/) covering `@media/core` (`createMediaClient`, models, `MediaError`, `EventEmitter`) and `@media/react` (`MediaProvider`, declarative data hooks, types).
+- **Component Documentation (Storybook)**: Storybook catalog located in [`packages/media-ui-react`](./packages/media-ui-react) with interactive stories for `useGrid`, `useLightbox`, and `useReelSwiper` built with decoupled, generic mock data models (`Product`, `Artwork`, `ReelStory`).
 
 ## Security & API Key Disclosure
 

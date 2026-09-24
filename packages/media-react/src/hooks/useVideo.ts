@@ -2,12 +2,21 @@ import { useState, useEffect, useRef } from "react";
 import type { Video, MediaError } from "@media/core";
 import { useMediaClient } from "../context";
 
+/** Return value contract for the `useVideo` hook */
 export interface UseVideoReturn {
+  /** The fetched video data, or null */
   data: Video | null;
+  /** Whether a network request is currently active */
   loading: boolean;
+  /** Error object if the request failed, or null */
   error: MediaError | null;
 }
 
+/**
+ * Declarative hook for fetching a single video by its unique Pexels numeric ID.
+ *
+ * @param id Numeric ID of the video
+ */
 export function useVideo(id: number | null | undefined): UseVideoReturn {
   const client = useMediaClient();
   const [data, setData] = useState<Video | null>(null);

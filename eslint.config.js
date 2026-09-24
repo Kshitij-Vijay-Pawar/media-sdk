@@ -4,7 +4,14 @@ import boundaries from "eslint-plugin-boundaries";
 
 export default tseslint.config(
   {
-    ignores: ["**/dist/**", "**/node_modules/**", "**/.turbo/**", "**/coverage/**"]
+    ignores: [
+      "**/dist/**",
+      "**/node_modules/**",
+      "**/.turbo/**",
+      "**/coverage/**",
+      "**/storybook-static/**",
+      "**/docs/**"
+    ]
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,

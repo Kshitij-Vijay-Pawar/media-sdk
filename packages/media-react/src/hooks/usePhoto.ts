@@ -2,12 +2,21 @@ import { useState, useEffect, useRef } from "react";
 import type { Photo, MediaError } from "@media/core";
 import { useMediaClient } from "../context";
 
+/** Return value contract for the `usePhoto` hook */
 export interface UsePhotoReturn {
+  /** The fetched photo data, or null */
   data: Photo | null;
+  /** Whether a network request is currently active */
   loading: boolean;
+  /** Error object if the request failed, or null */
   error: MediaError | null;
 }
 
+/**
+ * Declarative hook for fetching a single photo by its unique Pexels numeric ID.
+ *
+ * @param id Numeric ID of the photo
+ */
 export function usePhoto(id: number | null | undefined): UsePhotoReturn {
   const client = useMediaClient();
   const [data, setData] = useState<Photo | null>(null);

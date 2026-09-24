@@ -11,12 +11,26 @@ import {
   type MediaCoreConfig,
 } from "@media/core";
 
+/**
+ * Props for the MediaProvider component.
+ */
 export interface MediaProviderProps extends MediaCoreConfig {
+  /** React child tree that will receive access to the media client context */
   children: ReactNode;
 }
 
 export const MediaContext = createContext<MediaClient | null>(null);
 
+/**
+ * Top-level React Provider that initializes and shares a single `@media/core` MediaClient.
+ *
+ * @example
+ * ```tsx
+ * <MediaProvider apiKey="your-pexels-api-key">
+ *   <App />
+ * </MediaProvider>
+ * ```
+ */
 export function MediaProvider({
   apiKey,
   baseUrl,
@@ -42,6 +56,11 @@ export function MediaProvider({
   );
 }
 
+/**
+ * Access the active `MediaClient` instance from the nearest `MediaProvider`.
+ *
+ * @throws {Error} Thrown if called outside of `<MediaProvider>`.
+ */
 export function useMediaClient(): MediaClient {
   const client = useContext(MediaContext);
   if (!client) {

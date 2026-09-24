@@ -1,8 +1,7 @@
-import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { MediaProvider, useCuratedPhotos } from "@media/react";
-import { useGrid } from "@media/ui-react";
+import { useGrid, type GridProps } from "@media/ui-react";
 import App from "../App";
 
 describe("Web App Smoke & Integration Tests", () => {
@@ -20,7 +19,7 @@ describe("Web App Smoke & Integration Tests", () => {
   });
 
   it("composes @media/react data hook with @media/ui-react useGrid correctly", () => {
-    let capturedGridProps: Record<string, unknown> | null = null;
+    let capturedGridProps: GridProps | null = null;
 
     const IntegratedGridComponent = () => {
       const { data, loading, fetchNextPage, hasMore } = useCuratedPhotos({ perPage: 10 });
@@ -52,6 +51,6 @@ describe("Web App Smoke & Integration Tests", () => {
 
     expect(html).toContain('role="grid"');
     expect(html).toContain("test-integrated-grid");
-    expect(capturedGridProps.role).toBe("grid");
+    expect((capturedGridProps as GridProps | null)?.role).toBe("grid");
   });
 });

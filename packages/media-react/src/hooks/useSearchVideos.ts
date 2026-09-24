@@ -2,18 +2,33 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import type { Video, PaginationParams, MediaError } from "@media/core";
 import { useMediaClient } from "../context";
 
+/** Options for configuring video search query pagination */
 export type UseSearchVideosOptions = PaginationParams;
 
+/** Return value contract for the `useSearchVideos` hook */
 export interface UseSearchVideosReturn {
+  /** Accumulative array of normalized video items matching query */
   data: Video[];
+  /** Whether a network request is currently active */
   loading: boolean;
+  /** Error object if the request failed, or null */
   error: MediaError | null;
+  /** Trigger loading the subsequent page of video results */
   fetchNextPage: () => Promise<void>;
+  /** Whether additional video pages are available on the server */
   hasMore: boolean;
+  /** Total matching video count */
   totalResults: number;
+  /** Current page index */
   page: number;
 }
 
+/**
+ * Declarative hook for searching Pexels videos with automatic race-condition protection and infinite pagination.
+ *
+ * @param query Search query string
+ * @param options Optional pagination parameters
+ */
 export function useSearchVideos(
   query: string,
   options?: UseSearchVideosOptions

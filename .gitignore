@@ -1,46 +1,43 @@
 # dependencies (bun install)
-node_modules
+node_modules/
+.bun/
 
-# output
-out
-dist
+# output & builds
+dist/
+out/
+storybook-static/
 *.tgz
+*.tsbuildinfo
+
+# turbo & frameworks
+.turbo/
+.vercel/
 
 # code coverage
-coverage
+coverage/
 *.lcov
 
 # logs
-logs
-_.log
-report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
+logs/
+*.log
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # dotenv environment variable files
 .env
+.env.*
+.env.local
 .env.development.local
 .env.test.local
 .env.production.local
-.env.local
-
-# caches
-.eslintcache
-.cache
-*.tsbuildinfo
-
-# IntelliJ based IDEs
-.idea
-
-# Finder (MacOS) folder config
-.DS_Store
-
-
-
-
-node_modules/
-dist/
-.turbo/
-.env
-.env.*
 !.env.example
-*.log
+
+# caches & metadata
+.eslintcache
+.cache/
+
+# IDE & OS
+.idea/
+.vscode/
 .DS_Store
+Thumbs.db
+

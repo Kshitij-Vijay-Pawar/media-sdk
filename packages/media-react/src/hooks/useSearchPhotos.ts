@@ -2,18 +2,33 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import type { Photo, PaginationParams, MediaError } from "@media/core";
 import { useMediaClient } from "../context";
 
+/** Options for configuring search query pagination */
 export type UseSearchPhotosOptions = PaginationParams;
 
+/** Return value contract for the `useSearchPhotos` hook */
 export interface UseSearchPhotosReturn {
+  /** Accumulative array of normalized photo items matching query */
   data: Photo[];
+  /** Whether a network request is currently active */
   loading: boolean;
+  /** Error object if the request failed, or null */
   error: MediaError | null;
+  /** Trigger loading the subsequent page of results */
   fetchNextPage: () => Promise<void>;
+  /** Whether additional pages are available on the server */
   hasMore: boolean;
+  /** Total matching photo count */
   totalResults: number;
+  /** Current page index */
   page: number;
 }
 
+/**
+ * Declarative hook for searching Pexels photos with automatic debounced race-condition protection and infinite pagination.
+ *
+ * @param query Search query string
+ * @param options Optional pagination parameters
+ */
 export function useSearchPhotos(
   query: string,
   options?: UseSearchPhotosOptions

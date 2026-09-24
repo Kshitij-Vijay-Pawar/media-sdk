@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": [
+    "packages/media-core/src/**/*",
+    "packages/media-react/src/**/*"
+  ],
+  "exclude": [
+    "**/__tests__/**",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "packages/media-core/src/test-client.ts",
+    "**/dist/**",
+    "**/node_modules/**"
+  ]
+}
